@@ -4,3 +4,11 @@
     right: 20px;
     z-index: 1000;
 }
+
+.p-dialog .p-dialog-header .p-dialog-title {
+    text-align: center;
+    margin: 1%;
+}
+.p-dialog .p-dialog-content{
+    padding: 1rem;
+}

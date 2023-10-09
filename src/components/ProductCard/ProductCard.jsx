@@ -3,7 +3,6 @@ import { Button } from "../Button/Button";
 import "./ProductCard.css";
 
 import { Fieldset } from 'primereact/fieldset';
-        
 
 export const ProductCard = ({ product, className, onAdd }) => {
   const onAddHandler = () => {
@@ -13,7 +12,9 @@ export const ProductCard = ({ product, className, onAdd }) => {
   return (
     <Fieldset legend="Header" toggleable>
       <div className={"product " + className}>
-        <div className={"img"}></div>
+        <div className={"img"}>
+        <img src={product.image} alt={product.title} />
+        </div>
         <div className={"title"}>{product.title}</div>
         <div className={"description"}>{product.description}</div>
         <div className={"price"}>
