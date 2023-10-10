@@ -1,32 +1,36 @@
 import "./SpeedDialButton.css";
 import React, { useState } from "react";
 import { SpeedDial } from "primereact/speeddial";
-import { Dialog } from 'primereact/dialog';
-        
+// import { ModalDelete } from "../Modals/ModalDelete";
+import { ModalAdd } from "../Modals/ModalAdd";
+import { ProductList } from "../ProductList/ProductList";
 
-export const SpeedDialButton = ({ products }) => {
+export const SpeedDialButton = ({ products, onProductAdd }) => {
   const [visible, setVisible] = useState(false);
-  
-  const [dialogVisible, setDialogVisible] = useState(false);
+  const [visibleAdd, setVisibleAdd] = useState(false);
+  const [newProducts, setNewProducts] = useState([]);
 
   const actionItems = [
-    { icon: "pi pi-pencil", command: () => {setDialogVisible(true)} },
-    { icon: "pi pi-cart-plus", command: () => {setDialogVisible(true)} },
-    { icon: "pi pi-trash", command: () => {setDialogVisible(true)} },
+    // {
+    //   icon: "pi pi-pencil",
+    //   command: () => {
+    //     setVisibleEdit(true);
+    //   },
+    // },
+    {
+      icon: "pi pi-cart-plus",
+      command: () => {
+        setVisibleAdd(true);
+      },
+    },
+    
   ];
 
-  
-  const handleCloseDialog = () => {
-    setDialogVisible(false);
-  };
-
   const addHelicopter = (data) => {
-    products.push(data);
+    setNewProducts([...newProducts, data]);
+    onProductAdd([...products, data]);
   };
 
-  const deleteHelicopter = (id) => {
-    products = products.filter((item) => item.id !== id);
-  };
 
   const updateHelicopter = (id, data) => {
     products = products.map((item) => {
@@ -37,9 +41,9 @@ export const SpeedDialButton = ({ products }) => {
     });
   };
 
-  
-  console.log(products);
   return (
+ 
+
     <div>
       <SpeedDial
         model={actionItems}
@@ -48,16 +52,17 @@ export const SpeedDialButton = ({ products }) => {
         onHide={() => setVisible(false)}
         className={"speedButton"}
       />
-      <Dialog
-        header="Header"
-        visible={dialogVisible}
-        style={{ width: "50vw" }}
-        onHide={handleCloseDialog}
-      >
-        <p className="m-0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </Dialog>
+   
+      <ModalAdd
+        visible={visibleAdd}
+        setVisible={setVisibleAdd}
+        products={products}
+        onChange={addHelicopter}
+      />
+ 
+
+      <ProductList products={newProducts} />
+
     </div>
   );
 };

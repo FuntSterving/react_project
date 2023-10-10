@@ -3,17 +3,33 @@ import { useTelegram } from "../../hooks/useTelegram";
 import { ProductCard } from "../ProductCard/ProductCard";
 import "./ProductList.css";
 
-
-
 const getTotalPrice = (items) => {
   return items.reduce((acc, item) => {
     return (acc += item.price);
   }, 0);
 };
 
-export const ProductList = ({products}) => {
+export const ProductList = ({ products }) => {
   const { tg, queryId } = useTelegram();
   const [addedItems, setAddedItems] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  const removeProduct = (id) => {
+    // Удаление продукта из списка addedItems
+    const updatedAddedItems = addedItems.filter((item) => item.id !== id);
+    setAddedItems(updatedAddedItems);
+
+    // Удаление продукта из списка filteredProducts (если он там есть)
+    const updatedFilteredProducts = filteredProducts.filter(
+      (item) => item.id !== id
+    );
+    setFilteredProducts(updatedFilteredProducts);
+  };
+
+  useEffect(() => {
+    // Обновляем filteredProducts после изменения products
+    setFilteredProducts(products);
+  }, [products]);
 
   const onSendData = useCallback(() => {
     const data = {
@@ -61,12 +77,46 @@ export const ProductList = ({products}) => {
   };
 
   return (
+    // <div className={"list"}>
+    //   {products.map((item) => (
+    //     <ProductCard
+    //       product={item}
+    //       onAdd={onAdd}
+    //       onDelete={removeProduct}
+    //       className={"item"}
+    //       key={item.id}
+    //     ></ProductCard>
+    //   ))}
+
+    //   {addedItems.map((item) => (
+    //     <ProductCard
+    //       product={item}
+    //       onAdd={onAdd}
+    //       onDelete={removeProduct}
+    //       className={"item"}
+    //       key={item.id}
+    //     ></ProductCard>
+    //   ))}
+    // </div>
+
     <div className={"list"}>
-      {products.map((item) => (
+      {filteredProducts.map((item) => (
         <ProductCard
           product={item}
           onAdd={onAdd}
+          onDelete={removeProduct}
           className={"item"}
+          key={item.id}
+        ></ProductCard>
+      ))}
+
+      {addedItems.map((item) => (
+        <ProductCard
+          product={item}
+          onAdd={onAdd}
+          onDelete={removeProduct}
+          className={"item"}
+          key={item.id}
         ></ProductCard>
       ))}
     </div>

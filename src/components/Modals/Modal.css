@@ -1,0 +1,70 @@
+.input-container {
+  margin-bottom: 20px;
+}
+
+.input-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-container .p-inputtext {
+  width: 100%;
+  height: 2em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.p-inputtext:hover {
+    cursor: pointer;
+    background-color: #eeeff0;
+}
+
+
+
+/* Modal.css (или любой другой файл CSS, который вы используете) */
+
+.edit-fieldset {
+  width: 240px; /* Ширина блока */
+  height: 420px;
+/* Максимальная ширина блока */
+  margin: 0 auto; /* Выравнивание по центру */
+  padding: 20px; /* Внутренний отступ */
+  background-color: #fff; /* Цвет фона */
+  border: 1px solid #ccc; /* Граница */
+  border-radius: 5px; /* Закругление углов */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Тень блока */
+}
+
+.edit-fieldset h2 {
+  font-size: 18px; /* Размер заголовка */
+  margin-bottom: 10px; /* Отступ снизу от заголовка */
+}
+
+.edit-fieldset label {
+  display: block; /* Размещение элементов label на новой строке */
+  margin-bottom: 10px; /* Отступ снизу между элементами label */
+}
+
+.edit-fieldset input[type="text"] {
+  width: 100%; /* Занимать всю доступную ширину */
+  padding: 5px; /* Внутренний отступ в текстовом поле */
+  border: 1px solid #ccc; /* Граница текстового поля */
+  border-radius: 3px; /* Закругление углов текстового поля */
+}
+
+.edit-fieldset button {
+  display: inline-block; /* Сделать кнопку инлайновым элементом */
+  margin-right: 10px; /* Отступ справа между кнопками */
+  padding: 8px 15px; /* Внутренний отступ кнопки */
+  background-color: #007bff; /* Цвет фона кнопки */
+  color: #fff; /* Цвет текста кнопки */
+  border: none; /* Убрать границу кнопки */
+  border-radius: 3px; /* Закругление углов кнопки */
+  cursor: pointer; /* Указатель при наведении на кнопку */
+}
+
+.edit-fieldset button:hover {
+  background-color: #0056b3; /* Цвет фона кнопки при наведении */
+}
+
+
